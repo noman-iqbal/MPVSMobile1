@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mpvs.mpvsmobile"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="14" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <permission
+        android:name="com.mpvs.mpvsmobile.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.mpvs.mpvsmobile.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/log1"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.mpvs.mpvsmobile.SplashActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.mpvs.mpvsmobile.LoginActivity" />
+        <activity android:name="com.mpvs.mpvsmobile.BaseActivity" />
+        <activity android:name="com.mpvs.mpvsmobile.result.AddResultAtcivity" />
+        <activity android:name="com.mpvs.mpvsmobile.MainAcitivity" />
+        <activity android:name="com.mpvs.mpvsmobile.StudentResultActivity" />
+        <activity android:name="com.mpvs.mpvsmobile.MessagesList" />
+        <activity
+            android:name="com.mpvs.mpvsmobile.ItemListActivity"
+            android:label="@string/title_item_list" />
+
+        <receiver
+            android:name="com.google.android.gcm.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+
+                <!-- Receives the actual messages. -->
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <!-- Receives the registration id. -->
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="com.mpvs.mpvsmobile" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.mpvs.mpvsmobile.result.NetworkStatus"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.mpvs.mpvsmobile.GCMIntentService" />
+        <service android:name="com.mpvs.mpvsmobile.result.UploadResultService" />
+
+        <activity
+            android:name="com.mpvs.mpvsmobile.ItemDetailActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName=".ItemListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ItemListActivity" />
+        </activity>
+    </application>
+
+</manifest>
